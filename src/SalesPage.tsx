@@ -47,7 +47,8 @@ function scrollToPricing() {
   document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-function FeatureShot({
+/** Carcaça de smartphone limpa — sem notch/ilha — escala ~50% da anterior. */
+function PhoneMockup({
   src,
   alt,
   priority = false,
@@ -57,24 +58,26 @@ function FeatureShot({
   priority?: boolean;
 }) {
   return (
-    <div className="relative mx-auto w-full max-w-md">
+    <div className="relative mx-auto w-full max-w-[240px] sm:max-w-[280px]">
       <div
-        className="absolute inset-4 rounded-3xl bg-[#22C55E]/[0.08] blur-2xl pointer-events-none"
+        className="absolute inset-3 rounded-[36px] bg-[#22C55E]/[0.06] blur-xl pointer-events-none"
         aria-hidden
       />
-      <div className="relative rounded-2xl border border-white/10 bg-[#0a0a0a] p-1.5 shadow-[0_28px_56px_-14px_rgba(0,0,0,0.85)] overflow-hidden">
-        <img
-          src={src}
-          alt={alt}
-          width={780}
-          height={1688}
-          className="w-full h-auto rounded-xl object-contain"
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          {...(priority
-            ? { fetchPriority: 'high' as const }
-            : { fetchPriority: 'low' as const })}
-        />
+      <div className="relative rounded-[36px] border-[5px] border-zinc-800 bg-zinc-950 shadow-2xl shadow-green-950/20 p-0">
+        <div className="rounded-[30px] overflow-hidden bg-black">
+          <img
+            src={src}
+            alt={alt}
+            width={390}
+            height={844}
+            className="w-full h-auto object-contain object-top block"
+            loading={priority ? 'eager' : 'lazy'}
+            decoding="async"
+            {...(priority
+              ? { fetchPriority: 'high' as const }
+              : { fetchPriority: 'low' as const })}
+          />
+        </div>
       </div>
     </div>
   );
@@ -129,8 +132,8 @@ function FeatureBlock({
             ))}
           </ul>
         </div>
-        <div className={reverse ? 'md:order-1' : ''}>
-          <FeatureShot src={image} alt={imageAlt} />
+        <div className={`flex justify-center ${reverse ? 'md:order-1' : ''}`}>
+          <PhoneMockup src={image} alt={imageAlt} />
         </div>
       </div>
     </section>
@@ -206,9 +209,9 @@ export default function SalesPage() {
         </div>
       </header>
 
-      <main className="pt-20 sm:pt-24">
+      <main className="pt-16 sm:pt-20">
         {/* HERO */}
-        <section className="relative max-w-5xl mx-auto px-4 pt-10 sm:pt-16 pb-14 text-center">
+        <section className="relative max-w-5xl mx-auto px-4 pt-4 sm:pt-6 pb-12 text-center">
           <div
             className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,197,94,0.14),_transparent_50%)] pointer-events-none"
             aria-hidden
@@ -284,8 +287,8 @@ export default function SalesPage() {
               7 dias de garantia incondicional · Acesso imediato após o pagamento
             </p>
 
-            <div className="mt-12 max-w-sm mx-auto">
-              <FeatureShot
+            <div className="mt-8 flex justify-center">
+              <PhoneMockup
                 src={ASSETS.hero}
                 alt="Visão geral do dashboard Sommar App"
                 priority
@@ -310,9 +313,9 @@ export default function SalesPage() {
                 boletos a vencer e tira dúvidas operacionais — direto no chat do app.
               </p>
             </div>
-            <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-              <FeatureShot src={ASSETS.marinho} alt="Marinho IA Super-Agente" />
-              <FeatureShot
+            <div className="grid sm:grid-cols-2 gap-8 sm:gap-10 max-w-xl mx-auto justify-items-center">
+              <PhoneMockup src={ASSETS.marinho} alt="Marinho IA Super-Agente" />
+              <PhoneMockup
                 src={ASSETS.notifications}
                 alt="Central de notificações proativas do Marinho"
               />
@@ -392,9 +395,9 @@ export default function SalesPage() {
               PDF quando precisar prestar contas — a si mesmo ou ao contador.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <FeatureShot src={ASSETS.cockpit} alt="Cockpit financeiro Sommar App" />
-            <FeatureShot
+          <div className="grid sm:grid-cols-2 gap-8 sm:gap-10 max-w-xl mx-auto justify-items-center">
+            <PhoneMockup src={ASSETS.cockpit} alt="Cockpit financeiro Sommar App" />
+            <PhoneMockup
               src={ASSETS.subscriptions}
               alt="Assinaturas, insights e relatório PDF"
             />
@@ -416,9 +419,9 @@ export default function SalesPage() {
               manter a disciplina que o negócio exige.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <FeatureShot src={ASSETS.calendar} alt="Calendário e agenda unificados" />
-            <FeatureShot src={ASSETS.habits} alt="Tracker de hábitos e streaks" />
+          <div className="grid sm:grid-cols-2 gap-8 sm:gap-10 max-w-xl mx-auto justify-items-center">
+            <PhoneMockup src={ASSETS.calendar} alt="Calendário e agenda unificados" />
+            <PhoneMockup src={ASSETS.habits} alt="Tracker de hábitos e streaks" />
           </div>
         </section>
 
@@ -437,8 +440,8 @@ export default function SalesPage() {
               locais públicos.
             </p>
           </div>
-          <div className="max-w-md mx-auto">
-            <FeatureShot src={ASSETS.wellness} alt="Bem-estar, humor e sono" />
+          <div className="flex justify-center">
+            <PhoneMockup src={ASSETS.wellness} alt="Bem-estar, humor e sono" />
           </div>
           <div className="mt-8 flex items-center justify-center gap-2 text-[11px] font-bold text-white/80 uppercase tracking-wider">
             <EyeOff className="w-4 h-4 text-[#22C55E]" />
