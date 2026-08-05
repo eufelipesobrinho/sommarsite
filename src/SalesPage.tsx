@@ -177,7 +177,7 @@ export default function SalesPage() {
     },
     {
       q: 'Como recebo o acesso?',
-      a: 'Assim que o pagamento for confirmado pela Cakto, você recebe um e-mail com seu login para acessar o app em app.sommarapp.com.br.',
+      a: 'Assim que o pagamento for confirmado pela Cakto, você recebe um e-mail com o link de acesso e os dados de login. Verifique também a pasta de spam.',
     },
   ];
 
