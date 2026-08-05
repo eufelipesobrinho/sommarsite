@@ -186,7 +186,7 @@ export default function SalesPage() {
 
   return (
     <div className="min-h-screen bg-[#040404] text-[#e5e5e5] font-sora selection:bg-[#22C55E]/30 overflow-x-hidden">
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#040404]/85 border-b border-border/40">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#040404]">
         <div className="max-w-5xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
             <img
