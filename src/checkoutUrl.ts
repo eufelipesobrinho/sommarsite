@@ -1,4 +1,4 @@
-/** Checkouts oficiais Cakto — Sommar V2 */
+/** Checkouts oficiais Cakto — Sommar App */
 export const CAKTO_ANNUAL = 'https://pay.cakto.com.br/itbvz49';
 export const CAKTO_MONTHLY = 'https://pay.cakto.com.br/ni9nrpf_687767';
 

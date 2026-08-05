@@ -126,7 +126,7 @@ export default function App() {
             Parabéns pela sua decisão, <span className="text-gradient">Founder!</span>
           </h1>
           <p className="text-sm font-medium text-muted-foreground mb-8">
-            Você acaba de profissionalizar a gestão do seu negócio e da sua vida com o Sommar V2.
+            Você acaba de profissionalizar a gestão do seu negócio e da sua vida com o Sommar App.
           </p>
 
           <div className="w-full text-left p-6 rounded-2xl gradient-border mb-8">

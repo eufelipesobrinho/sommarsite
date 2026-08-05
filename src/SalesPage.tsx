@@ -14,6 +14,7 @@ import {
   Heart,
   Users,
   EyeOff,
+  ListChecks,
 } from 'lucide-react';
 import {
   CAKTO_ANNUAL,
@@ -148,7 +149,7 @@ export default function SalesPage() {
     setMonthlyHref(buildCaktoCheckoutUrl(CAKTO_MONTHLY));
 
     document.title =
-      'Sommar V2 — Sistema Operacional de Finanças, Produtividade e Estilo de Vida';
+      'Sommar App — Sistema Operacional de Finanças, Produtividade e Estilo de Vida';
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
       meta = document.createElement('meta');
@@ -157,13 +158,13 @@ export default function SalesPage() {
     }
     meta.setAttribute(
       'content',
-      'Sommar V2: separe pessoal e empresarial, automatize com Marinho IA e domine finanças, tarefas e hábitos em um único sistema operacional para autônomos e empreendedores.',
+      'Sommar App: separe pessoal e empresarial, automatize com Marinho IA e domine finanças, tarefas e hábitos em um único sistema operacional para autônomos e empreendedores.',
     );
   }, []);
 
   const faqs = [
     {
-      q: 'Para quem é o Sommar V2?',
+      q: 'Para quem é o Sommar App?',
       a: 'Para autônomos, freelancers, MEIs e empreendedores que precisam organizar finanças pessoais e do negócio, tarefas, hábitos e bem-estar em um só lugar — sem planilhas e sem apps fragmentados.',
     },
     {
@@ -192,7 +193,7 @@ export default function SalesPage() {
             />
             <span className="text-lg sm:text-xl font-extrabold tracking-tight">
               <span className="text-[#22C55E]">Sommar</span>{' '}
-              <span className="text-white">V2</span>
+              <span className="text-white">App</span>
             </span>
           </div>
           <button
@@ -236,7 +237,7 @@ export default function SalesPage() {
                   <iframe
                     className="absolute top-0 left-0 w-full h-full border-0"
                     src={HERO_VIDEO_EMBED}
-                    title="Demonstração Sommar V2"
+                    title="Demonstração Sommar App"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                     referrerPolicy="strict-origin-when-cross-origin"
@@ -246,7 +247,7 @@ export default function SalesPage() {
                     type="button"
                     onClick={() => setHeroVideoActive(true)}
                     className="absolute inset-0 w-full h-full group cursor-pointer"
-                    aria-label="Reproduzir vídeo Sommar V2"
+                    aria-label="Reproduzir vídeo Sommar App"
                   >
                     <img
                       src={`https://i.ytimg.com/vi/${HERO_VIDEO_ID}/hqdefault.jpg`}
@@ -286,7 +287,7 @@ export default function SalesPage() {
             <div className="mt-12 max-w-sm mx-auto">
               <FeatureShot
                 src={ASSETS.hero}
-                alt="Visão geral do dashboard Sommar V2"
+                alt="Visão geral do dashboard Sommar App"
                 priority
               />
             </div>
@@ -335,7 +336,7 @@ export default function SalesPage() {
           </div>
         </section>
 
-        {/* 2. PESSOAL VS BUSINESS */}
+        {/* 2. PESSOAL VS BUSINESS / CONTEXTOS */}
         <FeatureBlock
           eyebrow="Contextos"
           icon={Layers}
@@ -345,14 +346,35 @@ export default function SalesPage() {
               <span className="text-[#22C55E]">caixa da empresa.</span>
             </>
           }
-          description="Troque de contexto em 1 clique. Prolabore e operação ficam 100% organizados — dados, cores e métricas separados para Pessoal e Business."
+          description="Troque de contexto em 1 clique. Prolabore e operação ficam 100% organizados — dados, cores, temas e métricas separados para Pessoal e Business."
           bullets={[
             'Troca instantânea entre Pessoal e Empresarial',
+            '12 cores de temas e navegação sob medida',
             'Lucro, margem e fluxo sem misturar contas',
-            'Workspaces claros para casa e negócio',
+          ]}
+          image={ASSETS.themes}
+          imageAlt="Customização de temas e contextos Pessoal vs Business"
+        />
+
+        {/* 2b. TAREFAS */}
+        <FeatureBlock
+          eyebrow="Tarefas"
+          icon={ListChecks}
+          reverse
+          title={
+            <>
+              Gestão de tarefas no ritmo de quem{' '}
+              <span className="text-[#22C55E]">opera o próprio negócio.</span>
+            </>
+          }
+          description="Organize entregas, follow-ups e rotinas do dia a dia no mesmo sistema das suas finanças — com workspaces claros para o que é pessoal e o que é da empresa."
+          bullets={[
+            'Listas e workspaces para Pessoal e Business',
+            'Prioridades e status sem apps extras',
+            'Tudo conectado ao seu fluxo operacional',
           ]}
           image={ASSETS.workspaces}
-          imageAlt="Gestão de tarefas e workspaces Pessoal vs Business"
+          imageAlt="Gestão de tarefas e workspaces Sommar App"
         />
 
         {/* 3. COCKPIT + PDF */}
@@ -371,7 +393,7 @@ export default function SalesPage() {
             </p>
           </div>
           <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <FeatureShot src={ASSETS.cockpit} alt="Cockpit financeiro Sommar V2" />
+            <FeatureShot src={ASSETS.cockpit} alt="Cockpit financeiro Sommar App" />
             <FeatureShot
               src={ASSETS.subscriptions}
               alt="Assinaturas, insights e relatório PDF"
@@ -411,13 +433,12 @@ export default function SalesPage() {
               <span className="text-[#22C55E]">total privacidade.</span>
             </h2>
             <p className="text-xs sm:text-sm text-muted-foreground mt-3 leading-relaxed font-medium">
-              Registro de humor, dial de sono, 12 cores de temas e o Modo Olhinho para ocultar dados
-              sensíveis em locais públicos.
+              Registro de humor, dial de sono e o Modo Olhinho para ocultar dados sensíveis em
+              locais públicos.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <div className="max-w-md mx-auto">
             <FeatureShot src={ASSETS.wellness} alt="Bem-estar, humor e sono" />
-            <FeatureShot src={ASSETS.themes} alt="Customização de temas e navegação" />
           </div>
           <div className="mt-8 flex items-center justify-center gap-2 text-[11px] font-bold text-white/80 uppercase tracking-wider">
             <EyeOff className="w-4 h-4 text-[#22C55E]" />
@@ -443,7 +464,7 @@ export default function SalesPage() {
             'Hábitos e bem-estar sempre privados',
           ]}
           image={ASSETS.shared}
-          imageAlt="Workspaces compartilhados Sommar V2"
+          imageAlt="Workspaces compartilhados Sommar App"
         />
 
         {/* PLANOS */}
@@ -454,7 +475,7 @@ export default function SalesPage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center max-w-xl mx-auto mb-12">
               <span className="text-[10px] font-extrabold text-[#22C55E] border border-[#22C55E]/20 bg-[#22C55E]/5 px-3 py-1 rounded-full uppercase tracking-widest">
-                Acesso ao Sommar V2
+                Acesso ao Sommar App
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mt-4">
                 Escolha seu plano e{' '}
@@ -496,7 +517,7 @@ export default function SalesPage() {
                   <ul className="flex flex-col gap-2.5 border-t border-border/40 pt-5 text-[11px] text-white/90 font-medium">
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E] flex-shrink-0" />
-                      Acesso total ao Sommar V2
+                      Acesso total ao Sommar App
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E] flex-shrink-0" />
@@ -587,7 +608,7 @@ export default function SalesPage() {
                 Garantia incondicional de 7 dias
               </h3>
               <p className="text-xs text-muted-foreground font-medium leading-relaxed">
-                Teste o Sommar V2 sem risco. Não gostou? Devolvemos 100% do valor — sem perguntas.
+                Teste o Sommar App sem risco. Não gostou? Devolvemos 100% do valor — sem perguntas.
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-[10px] text-[#22C55E] font-bold uppercase tracking-wider pt-1">
                 <span className="inline-flex items-center gap-1">
