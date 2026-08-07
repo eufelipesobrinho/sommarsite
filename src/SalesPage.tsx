@@ -6,7 +6,6 @@ import {
   Sparkles,
   ShieldCheck,
   Lock,
-  Play,
   Mic,
   Layers,
   BarChart3,
@@ -26,9 +25,6 @@ import {
 const PRIMARY_CTA =
   'inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#22C55E] to-[#4ADE80] text-black font-extrabold uppercase tracking-widest rounded-xl shadow-lg shadow-[#22C55E]/25 hover:scale-[1.02] active:scale-[0.99] transition-transform duration-200';
 
-const HERO_VIDEO_ID = 'klhcUMYE2Ww';
-const HERO_VIDEO_EMBED = `https://www.youtube-nocookie.com/embed/${HERO_VIDEO_ID}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
-
 const ASSETS = {
   hero: '/01-visao-geral-dashboard.jpg',
   cockpit: '/02-cockpit-financeiro.jpg',
@@ -41,7 +37,47 @@ const ASSETS = {
   shared: '/09-workspaces-compartilhados.jpg',
   notifications: '/10-central-notificacoes-marinho.jpg',
   marinho: '/11-marinho-ia-super-agente.jpg',
+  prova1: '/prova1.webp',
+  prova2: '/prova2.webp',
 } as const;
+
+const PAIN_POINTS = [
+  {
+    title: 'Dinheiro Misturado',
+    description: 'Não sabe o que é lucro real da empresa e o que é conta pessoal.',
+  },
+  {
+    title: 'Fuga de Caixa',
+    description: 'O dinheiro entra, mas no final do mês você não sabe para onde foi.',
+  },
+  {
+    title: 'Promessas e Prazos Perdidos',
+    description: 'Esquece de cobrar clientes ou de pagar fornecedores no dia.',
+  },
+  {
+    title: 'Overdose de Ferramentas',
+    description:
+      'Tenta usar planilhas complexas, cadernos e 3 apps diferentes que não se conversam.',
+  },
+] as const;
+
+const TESTIMONIALS = [
+  {
+    quote:
+      'A IA Marinho integrada direto no app mudou meu jogo. Mando áudio, texto ou foto do gasto ali mesmo no chat interno e tudo já entra categorizado no financeiro.',
+    author: 'José',
+  },
+  {
+    quote:
+      'Consegui finalmente separar minhas despesas de casa das despesas da empresa. Só isso já valeu 10x o valor do plano.',
+    author: 'Ágabo',
+  },
+  {
+    quote:
+      'O cockpit financeiro e a exportação em PDF facilitam demais na hora de prestar contas. Simples, direto e sem firula.',
+    author: 'Pedro',
+  },
+] as const;
 
 function scrollToPricing() {
   document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' });
@@ -141,7 +177,6 @@ function FeatureBlock({
 }
 
 export default function SalesPage() {
-  const [heroVideoActive, setHeroVideoActive] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [annualHref, setAnnualHref] = useState(CAKTO_ANNUAL);
   const [monthlyHref, setMonthlyHref] = useState(CAKTO_MONTHLY);
@@ -225,55 +260,26 @@ export default function SalesPage() {
             </div>
 
             <h1 className="text-2xl sm:text-4xl md:text-[2.75rem] font-extrabold uppercase tracking-tight text-white leading-[1.12] mb-5 max-w-3xl mx-auto">
-              O Sistema Operacional que Falta no Seu{' '}
-              <span className="text-[#22C55E]">Negócio e na Sua Vida.</span>
+              O Ecossistema Definitivo para Autônomos Organizarem o Caixa, as Tarefas e
+              a Rotina em Um Só Lugar
             </h1>
 
             <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
-              Separe o Pessoal do Empresarial em 1 clique, automatize lançamentos por áudio ou
-              texto com o Marinho IA e domine suas finanças, tarefas e hábitos em um único lugar.
+              Chega de misturar dinheiro pessoal com o da empresa, esquecer cobranças e
+              usar 5 aplicativos diferentes. Tenha controle financeiro total e assistente
+              de IA na palma da mão.
             </p>
 
             <div className="max-w-2xl mx-auto w-full mb-8 rounded-2xl border border-border bg-[#0a0a0a] p-2 shadow-2xl card-glow">
-              <div className="relative w-full pb-[56.25%] h-0 rounded-xl overflow-hidden bg-black">
-                {heroVideoActive ? (
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full border-0"
-                    src={HERO_VIDEO_EMBED}
-                    title="Demonstração Sommar App"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    referrerPolicy="strict-origin-when-cross-origin"
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setHeroVideoActive(true)}
-                    className="absolute inset-0 w-full h-full group cursor-pointer"
-                    aria-label="Reproduzir vídeo Sommar App"
-                  >
-                    <img
-                      src={`https://i.ytimg.com/vi/${HERO_VIDEO_ID}/hqdefault.jpg`}
-                      alt=""
-                      width={480}
-                      height={360}
-                      className="absolute inset-0 w-full h-full object-cover"
-                      loading="eager"
-                      decoding="async"
-                      fetchPriority="high"
-                    />
-                    <span className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/45 transition-colors">
-                      <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-[#22C55E] to-[#4ADE80] flex items-center justify-center shadow-xl shadow-[#22C55E]/30 group-hover:scale-105 transition-transform">
-                        <Play
-                          className="w-6 h-6 sm:w-7 sm:h-7 text-black ml-0.5"
-                          fill="currentColor"
-                          aria-hidden
-                        />
-                      </span>
-                    </span>
-                  </button>
-                )}
-              </div>
+              <video
+                src="/videos/vídeo-head.mp4"
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full h-auto rounded-xl shadow-2xl bg-black border border-white/10"
+              >
+                Seu navegador não suporta a reprodução de vídeo.
+              </video>
             </div>
 
             <button
@@ -294,6 +300,29 @@ export default function SalesPage() {
                 priority
               />
             </div>
+          </div>
+        </section>
+
+        {/* DORES E IDENTIFICAÇÃO */}
+        <section className="max-w-5xl mx-auto px-4 py-12 border-b border-border/40">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight text-center mb-8 leading-tight">
+            Você se identifica com algum destes problemas no seu dia a dia?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {PAIN_POINTS.map((item) => (
+              <div
+                key={item.title}
+                className="p-5 rounded-xl border border-border bg-[#060606] text-left"
+              >
+                <h3 className="text-sm font-extrabold text-white uppercase tracking-wide mb-2">
+                  <span aria-hidden>❌ </span>
+                  {item.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -470,10 +499,53 @@ export default function SalesPage() {
           imageAlt="Workspaces compartilhados Sommar App"
         />
 
+        {/* PROVA SOCIAL E DEPOIMENTOS */}
+        <section className="max-w-5xl mx-auto px-4 py-16 border-t border-border/40 text-center">
+          <span className="text-[10px] font-extrabold text-[#22C55E] border border-[#22C55E]/20 bg-[#22C55E]/5 px-3 py-1 rounded-full uppercase tracking-widest inline-flex items-center gap-1.5">
+            ⭐ Nota 4.9/5 por Autônomos e Empreendedores
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mt-4 leading-tight max-w-3xl mx-auto">
+            Quem usou, organizou a vida e não volta mais para a bagunça
+          </h2>
+
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <img
+              src={ASSETS.prova1}
+              alt="Depoimento de usuário Sommar App"
+              className="w-full max-w-xs sm:max-w-sm rounded-xl border border-border shadow-lg"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src={ASSETS.prova2}
+              alt="Depoimento de usuário Sommar App"
+              className="w-full max-w-xs sm:max-w-sm rounded-xl border border-border shadow-lg"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+            {TESTIMONIALS.map((item) => (
+              <div
+                key={item.author}
+                className="p-5 rounded-xl border border-border bg-[#060606] flex flex-col justify-between"
+              >
+                <p className="text-xs sm:text-sm text-white/90 font-medium leading-relaxed">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <p className="mt-4 text-[11px] font-extrabold text-[#22C55E] uppercase tracking-wider">
+                  — {item.author}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* PLANOS */}
         <section
           id="planos"
-          className="border-t border-border bg-white/[0.02] py-20 sm:py-24 px-4 scroll-mt-20"
+          className="border-t-2 border-[#22C55E]/40 bg-gradient-to-b from-[#022c22] via-[#040404] to-[#040404] py-20 sm:py-24 px-4 scroll-mt-20"
         >
           <div className="max-w-4xl mx-auto">
             <div className="text-center max-w-xl mx-auto mb-12">
