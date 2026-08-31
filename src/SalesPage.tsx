@@ -37,8 +37,6 @@ const ASSETS = {
   shared: '/09-workspaces-compartilhados.jpg',
   notifications: '/10-central-notificacoes-marinho.jpg',
   marinho: '/11-marinho-ia-super-agente.jpg',
-  prova1: '/prova1.webp',
-  prova2: '/prova2.webp',
 } as const;
 
 const PAIN_POINTS = [
@@ -61,7 +59,22 @@ const PAIN_POINTS = [
   },
 ] as const;
 
-const TESTIMONIALS = [
+type Testimonial = {
+  quote: string;
+  author: string;
+};
+
+const TESTIMONIALS: readonly Testimonial[] = [
+  {
+    quote:
+      'O cockpit financeiro e a exportação em PDF facilitam demais na hora de prestar contas. Simples, direto e sem firula.',
+    author: 'Pedro',
+  },
+  {
+    quote:
+      'Consegui finalmente separar minhas despesas de casa das despesas do dia a dia. Só isso já valeu 10x o valor do plano.',
+    author: 'Ágabo',
+  },
   {
     quote:
       'A IA Marinho integrada direto no app mudou meu jogo. Mando áudio, texto ou foto do gasto ali mesmo no chat interno e tudo já entra categorizado no financeiro.',
@@ -69,18 +82,104 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      'Consegui finalmente separar minhas despesas de casa das despesas da empresa. Só isso já valeu 10x o valor do plano.',
-    author: 'Ágabo',
+      'Passando pra agradecer por ter me apresentado o Sommar. Ele tem me ajudado muito na gestão da minha rotina e das minhas finanças, separando entradas, saídas e investimentos pessoais. O auxílio da inteligência artificial otimiza meu tempo de forma rápida e eficiente. Mudou minha maneira de gerir minha vida financeira!',
+    author: 'Marta',
   },
   {
     quote:
-      'O cockpit financeiro e a exportação em PDF facilitam demais na hora de prestar contas. Simples, direto e sem firula.',
-    author: 'Pedro',
+      'O Sommar App tem me ajudado a gerenciar minhas finanças de forma fácil e tecnológica. Lá eu sei exatamente quanto vou ter de déficit ou de lucro, assim não me perco com meu dinheiro. Realmente é um app muito bom.',
+    author: 'Nicholas',
   },
-] as const;
+];
 
 function scrollToPricing() {
   document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' });
+}
+
+function TestimonialCard({
+  quote,
+  author,
+  ariaHidden = false,
+}: Testimonial & { ariaHidden?: boolean }) {
+  return (
+    <article
+      aria-hidden={ariaHidden || undefined}
+      className="w-[min(82vw,20.5rem)] sm:w-[24rem] shrink-0 p-5 rounded-xl border border-white/10 bg-[#060606] flex flex-col justify-between text-left shadow-lg shadow-black/20"
+    >
+      <p className="text-xs sm:text-sm text-white/90 font-medium leading-relaxed">
+        &ldquo;{quote}&rdquo;
+      </p>
+      <p className="mt-4 text-[11px] font-extrabold text-[#22C55E] uppercase tracking-wider">
+        — {author}
+      </p>
+    </article>
+  );
+}
+
+function MarqueeRow({
+  items,
+  reverse = false,
+}: {
+  items: readonly Testimonial[];
+  reverse?: boolean;
+}) {
+  return (
+    <div className="marquee-viewport overflow-hidden">
+      <div
+        className={`flex w-max ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'} group-hover/marquee:[animation-play-state:paused]`}
+      >
+        <ul className="flex gap-4 pr-4">
+          {items.map((item) => (
+            <li key={item.author}>
+              <TestimonialCard quote={item.quote} author={item.author} />
+            </li>
+          ))}
+        </ul>
+        <ul className="marquee-clone flex gap-4 pr-4" aria-hidden>
+          {items.map((item) => (
+            <li key={`${item.author}-clone`}>
+              <TestimonialCard quote={item.quote} author={item.author} ariaHidden />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function SocialProofMarquee() {
+  const reverseItems = [...TESTIMONIALS].reverse();
+
+  return (
+    <section className="bg-[#060606] border-y border-white/[0.06] py-14 sm:py-16 overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 text-center mb-10">
+        <span className="text-[10px] font-extrabold text-[#22C55E] border border-[#22C55E]/20 bg-[#22C55E]/5 px-3 py-1 rounded-full uppercase tracking-widest inline-flex items-center gap-1.5">
+          ⭐ Quem já organizou a vida com o Sommar
+        </span>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight mt-4 leading-tight max-w-3xl mx-auto">
+          Quem usou, organizou a vida e não quer mais saber de planilhas complexas
+        </h2>
+      </div>
+
+      <div className="group/marquee relative">
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 sm:w-24 bg-gradient-to-r from-[#060606] to-transparent"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 sm:w-24 bg-gradient-to-l from-[#060606] to-transparent"
+          aria-hidden
+        />
+
+        <div className="flex flex-col gap-4">
+          <MarqueeRow items={TESTIMONIALS} />
+          <div className="hidden md:block">
+            <MarqueeRow items={reverseItems} reverse />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 /** Carcaça de smartphone limpa — sem notch/ilha — escala ~50% da anterior. */
@@ -303,6 +402,8 @@ export default function SalesPage() {
           </div>
         </section>
 
+        <SocialProofMarquee />
+
         {/* DORES E IDENTIFICAÇÃO */}
         <section className="max-w-5xl mx-auto px-4 py-12 border-b border-border/40">
           <h2 className="text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight text-center mb-8 leading-tight">
@@ -498,49 +599,6 @@ export default function SalesPage() {
           image={ASSETS.shared}
           imageAlt="Workspaces compartilhados Sommar App"
         />
-
-        {/* PROVA SOCIAL E DEPOIMENTOS */}
-        <section className="max-w-5xl mx-auto px-4 py-16 border-t border-border/40 text-center">
-          <span className="text-[10px] font-extrabold text-[#22C55E] border border-[#22C55E]/20 bg-[#22C55E]/5 px-3 py-1 rounded-full uppercase tracking-widest inline-flex items-center gap-1.5">
-            ⭐ Nota 4.9/5 por Autônomos e Empreendedores
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mt-4 leading-tight max-w-3xl mx-auto">
-            Quem usou, organizou a vida e não volta mais para a bagunça
-          </h2>
-
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <img
-              src={ASSETS.prova1}
-              alt="Depoimento de usuário Sommar App"
-              className="w-full max-w-xs sm:max-w-sm rounded-xl border border-border shadow-lg"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              src={ASSETS.prova2}
-              alt="Depoimento de usuário Sommar App"
-              className="w-full max-w-xs sm:max-w-sm rounded-xl border border-border shadow-lg"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-            {TESTIMONIALS.map((item) => (
-              <div
-                key={item.author}
-                className="p-5 rounded-xl border border-border bg-[#060606] flex flex-col justify-between"
-              >
-                <p className="text-xs sm:text-sm text-white/90 font-medium leading-relaxed">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-                <p className="mt-4 text-[11px] font-extrabold text-[#22C55E] uppercase tracking-wider">
-                  — {item.author}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* PLANOS */}
         <section
