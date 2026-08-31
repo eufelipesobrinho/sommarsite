@@ -23,11 +23,6 @@ const PRIMARY_CTA =
 const SECONDARY_CTA =
   'inline-flex items-center justify-center gap-2 border border-border bg-white/[0.03] text-white font-extrabold uppercase tracking-widest rounded-xl hover:bg-white/[0.06] transition-colors';
 
-const EMAIL_MICROCOPY =
-  'Use no checkout o e-mail com o qual você vai criar a conta no Sommar. É assim que o acesso libera automaticamente.';
-
-const CADASTRO_URL = 'https://app.sommarapp.com.br/cadastro';
-
 const PAGE_TITLE = 'Sommar — Controle o mês sem planilha, com IA que lança por voz e foto';
 const PAGE_DESCRIPTION =
   'Salário, casa e renda extra no mesmo app — sem misturar. Marinho IA lança gastos por texto, voz ou comprovante. Relatório em PDF. Pessoal e profissional separados.';
@@ -35,14 +30,13 @@ const PAGE_DESCRIPTION =
 const ASSETS = {
   hero: '/01-visao-geral-dashboard.jpg',
   cockpit: '/02-cockpit-financeiro.jpg',
-  workspaces: '/03-gestao-tarefas-workspaces.jpg',
   calendar: '/04-calendario-unificado.jpg',
-  habits: '/05-tracker-habitos-streaks.jpg',
-  wellness: '/06-bem-estar-humor-sono.jpg',
-  subscriptions: '/07-assinaturas-insights-pdf.jpg',
-  themes: '/08-customizacao-temas-navegacao.jpg',
-  shared: '/09-workspaces-compartilhados.jpg',
-  notifications: '/10-central-notificacoes-marinho.jpg',
+  contasCartoes: '/contasecartoes.jpg',
+  relatorios: '/relatorios.jpg',
+  assinaturasInsights: '/assinaturas-insights.jpg',
+  tarefas: '/tarefas.jpg',
+  habitos: '/habitos.jpg',
+  sono: '/sono.jpg',
   marinho: '/11-marinho-ia-super-agente.jpg',
 } as const;
 
@@ -174,15 +168,15 @@ const PRODUCT_PROOF = [
     eyebrow: 'Contas e cartões',
     title: 'O lançamento já nasce na conta certa.',
     description: 'Saldo, limite, fechamento, vencimento — cada contexto no seu lugar.',
-    image: ASSETS.themes,
-    imageAlt: 'Contextos Pessoal e Business no Sommar',
+    image: ASSETS.contasCartoes,
+    imageAlt: 'Contas e cartões no Sommar App',
   },
   {
-    eyebrow: 'Relatório PDF',
+    eyebrow: 'Relatórios',
     title: 'O mês inteiro numa página.',
     description: 'Capa executiva, assinaturas, gastos por membro e por cartão. Para você ou para o casal.',
-    image: ASSETS.subscriptions,
-    imageAlt: 'Relatório PDF e assinaturas Sommar App',
+    image: ASSETS.relatorios,
+    imageAlt: 'Relatórios PDF no Sommar App',
   },
   {
     eyebrow: 'Calendário',
@@ -194,9 +188,31 @@ const PRODUCT_PROOF = [
   {
     eyebrow: 'Privacidade',
     title: 'Abre no trabalho. Ninguém lê sua vida.',
-    description: 'Toque no olho. Valores — e, se quiser, descrições — viram ••••••.',
-    image: ASSETS.wellness,
-    imageAlt: 'Bem-estar e modo privacidade Sommar App',
+    description:
+      'Toque no olho. Valores e descrições ficam desfocados preservando sua privacidade.',
+    image: ASSETS.assinaturasInsights,
+    imageAlt: 'Modo privacidade no Sommar App',
+  },
+  {
+    eyebrow: 'Tarefas',
+    title: 'Prioridades no mesmo sistema das suas finanças.',
+    description: 'Listas, workspaces e status — sem um app extra só para o dia a dia.',
+    image: ASSETS.tarefas,
+    imageAlt: 'Gestão de tarefas no Sommar App',
+  },
+  {
+    eyebrow: 'Hábitos',
+    title: 'Sequências visíveis. Sem planilha de rotina.',
+    description: 'Tracker de hábitos com streaks para manter o que você prometeu para si.',
+    image: ASSETS.habitos,
+    imageAlt: 'Tracker de hábitos no Sommar App',
+  },
+  {
+    eyebrow: 'Sono',
+    title: 'Energia também entra no sistema.',
+    description: 'Registro de humor e dial de sono — privados, só seus.',
+    image: ASSETS.sono,
+    imageAlt: 'Sono e humor no Sommar App',
   },
 ] as const;
 
@@ -204,25 +220,30 @@ function scrollToPricing() {
   document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-function ScrollCta({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
+function CtaHint() {
   return (
-    <button type="button" onClick={scrollToPricing} className={className}>
-      {children}
-    </button>
+    <p className="mt-3 text-[10px] text-muted-foreground font-medium text-center">
+      Acesso imediato após o pagamento
+    </p>
   );
 }
 
-function EmailNote({ className = '' }: { className?: string }) {
+function ScrollCta({
+  children,
+  className,
+  hint = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  hint?: boolean;
+}) {
   return (
-    <p className={`text-[10px] sm:text-[11px] text-muted-foreground font-medium leading-relaxed ${className}`}>
-      {EMAIL_MICROCOPY}
-    </p>
+    <div className="flex flex-col items-center">
+      <button type="button" onClick={scrollToPricing} className={className}>
+        {children}
+      </button>
+      {hint ? <CtaHint /> : null}
+    </div>
   );
 }
 
@@ -445,14 +466,6 @@ export default function SalesPage() {
       a: 'É PWA: abre no celular, você instala na tela inicial. Não depende da App Store nem da Play Store.',
     },
     {
-      q: 'Por que o mesmo e-mail?',
-      a: 'O pagamento na Cakto libera a conta Sommar pelo e-mail. Se cadastro e checkout forem e-mails diferentes, o acesso não destrava sozinho.',
-    },
-    {
-      q: 'Tem teste grátis?',
-      a: 'Não. Você assina e entra no produto completo. Há 7 dias para pedir reembolso diretamente pela Cakto se o Sommar não for o sistema da sua vida.',
-    },
-    {
       q: 'O que acontece depois que eu pago?',
       a: '1) Checkout Cakto → 2) Cadastro no app com o mesmo e-mail → 3) Acesso liberado.',
     },
@@ -492,14 +505,14 @@ export default function SalesPage() {
             </p>
 
             <h1 className="text-2xl sm:text-4xl md:text-[2.6rem] font-extrabold tracking-tight text-white leading-[1.15] mb-5 max-w-3xl mx-auto">
-              Pare de descobrir o mês no vermelho. O Sommar mostra o que entra, o que sai e o que
+              Pare de começar o mês no vermelho. O Sommar mostra o que entra, o que sai e o que
               sobra — e um consultor de IA lança por você.
             </h1>
 
             <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
               Fale “gastei 80 no almoço”, mande a foto do comprovante ou digite. O Marinho monta o
               lançamento. Você confirma. Está feito. Serve se você é CLT, autônomo, ou os dois: vida
-              pessoal de um lado, renda extra ou empresa do outro — se você tiver.
+              pessoal de um lado, renda extra ou empresa do outro.
             </p>
 
             <div className="max-w-2xl mx-auto w-full mb-8 rounded-2xl border border-border bg-[#0a0a0a] p-2 shadow-2xl card-glow">
@@ -515,14 +528,11 @@ export default function SalesPage() {
             </div>
 
             <ScrollCta
+              hint
               className={`${PRIMARY_CTA} w-full sm:w-auto text-xs sm:text-sm px-10 py-5 shadow-2xl shadow-[#22C55E]/20`}
             >
               Assinar o Sommar <ArrowRight className="w-4 h-4" />
             </ScrollCta>
-            <p className="mt-3 text-[10px] text-muted-foreground font-medium">
-              Acesso imediato após o pagamento · mesmo e-mail no checkout e no app
-            </p>
-            <EmailNote className="mt-2 max-w-md mx-auto" />
 
             <div className="mt-8 flex justify-center">
               <PhoneMockup
@@ -664,7 +674,7 @@ export default function SalesPage() {
             alguém encostar no celular.
           </p>
           <div className="mt-8 flex justify-center">
-            <ScrollCta className={`${PRIMARY_CTA} text-xs sm:text-sm px-8 py-4`}>
+            <ScrollCta hint className={`${PRIMARY_CTA} text-xs sm:text-sm px-8 py-4`}>
               Assinar o Sommar <ArrowRight className="w-4 h-4" />
             </ScrollCta>
           </div>
@@ -685,7 +695,7 @@ export default function SalesPage() {
               {
                 n: '2',
                 title: 'Crie a conta',
-                text: `Cadastro em ${CADASTRO_URL.replace('https://', '')} com esse mesmo e-mail. O acesso libera sozinho.`,
+                text: 'Crie a conta no app com o mesmo e-mail do checkout. O acesso libera sozinho.',
               },
               {
                 n: '3',
@@ -763,10 +773,9 @@ export default function SalesPage() {
             ))}
           </ul>
           <div className="mt-10 flex flex-col items-center gap-3">
-            <ScrollCta className={`${PRIMARY_CTA} text-xs sm:text-sm px-8 py-4`}>
+            <ScrollCta hint className={`${PRIMARY_CTA} text-xs sm:text-sm px-8 py-4`}>
               Assinar o Sommar <ArrowRight className="w-4 h-4" />
             </ScrollCta>
-            <EmailNote className="max-w-md text-center" />
           </div>
         </section>
 
@@ -848,28 +857,38 @@ export default function SalesPage() {
                       </span>
                       <span className="text-[10px] font-bold text-neutral-500"> à vista /ano</span>
                     </div>
-                    <p className="text-[10px] text-[#22C55E] font-bold mt-2 uppercase tracking-wider">
-                      ~R$ 24,75/mês
+                    <p className="mt-2 text-sm font-extrabold text-white/80 tracking-tight">
+                      ≠ R$ 30,00*
+                    </p>
+                    <p className="text-[10px] text-muted-foreground font-medium mt-1">
+                      * + taxas Cakto
                     </p>
                   </div>
 
                   <ul className="flex flex-col gap-2.5 border-t border-border/40 pt-5 text-[11px] text-white/90 font-medium">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E] flex-shrink-0" />
-                      Acesso total ao Sommar App
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E] flex-shrink-0" />
-                      Marinho IA ilimitado
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E] flex-shrink-0" />
-                      Todos os módulos e atualizações
-                    </li>
+                    {[
+                      'Marinho IA: texto, voz e foto de comprovante',
+                      'Financeiro: contas, cartões, parcelas e recorrências',
+                      'Contextos Pessoal e Business, isolados',
+                      'Mapa do mês e o que vence em 7 dias',
+                      'Relatórios em PDF',
+                      'Calendário unificado',
+                      'Tarefas e workspaces',
+                      'Hábitos com streaks',
+                      'Humor e sono (privados)',
+                      'Modo privacidade (valores desfocados)',
+                      'Até 5 pessoas no workspace',
+                      'Atualizações do app',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E] flex-shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
-                <div className="pt-6 space-y-3">
+                <div className="pt-6">
                   <a
                     href={annualHref}
                     target="_blank"
@@ -878,7 +897,7 @@ export default function SalesPage() {
                   >
                     Assinar o anual <ArrowRight className="w-4 h-4" />
                   </a>
-                  <EmailNote />
+                  <CtaHint />
                 </div>
               </div>
 
@@ -917,7 +936,7 @@ export default function SalesPage() {
                   </ul>
                 </div>
 
-                <div className="pt-6 space-y-3">
+                <div className="pt-6">
                   <a
                     href={monthlyHref}
                     target="_blank"
@@ -926,23 +945,15 @@ export default function SalesPage() {
                   >
                     Assinar o mensal
                   </a>
-                  <EmailNote />
+                  <CtaHint />
                 </div>
               </div>
             </div>
 
             <div className="mt-10 p-5 max-w-xl mx-auto rounded-2xl border border-border bg-[#060606] text-center">
               <p className="text-[11px] sm:text-xs text-white/85 font-medium leading-relaxed">
-                1) Checkout Cakto → 2) Crie sua conta em{' '}
-                <a
-                  href={CADASTRO_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[#22C55E] underline underline-offset-2"
-                >
-                  app.sommarapp.com.br/cadastro
-                </a>{' '}
-                com o mesmo e-mail → 3) Acesso liberado em segundos.
+                1) Checkout Cakto → 2) Crie sua conta no app com o mesmo e-mail → 3) Acesso
+                liberado em segundos.
               </p>
             </div>
 
@@ -1018,7 +1029,7 @@ export default function SalesPage() {
               Seu próximo mês pode ter{' '}
               <span className="text-[#22C55E]">dono.</span>
             </h3>
-            <ScrollCta className={`${PRIMARY_CTA} text-xs px-8 py-4`}>
+            <ScrollCta hint className={`${PRIMARY_CTA} text-xs px-8 py-4`}>
               Assinar o Sommar <ArrowRight className="w-4 h-4" />
             </ScrollCta>
             <ScrollCta className={`${SECONDARY_CTA} text-[10px] px-6 py-3`}>
