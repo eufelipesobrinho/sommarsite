@@ -123,10 +123,10 @@ export default function App() {
             <CheckCircle2 className="w-8 h-8" />
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold uppercase text-white mb-3 tracking-tight">
-            Parabéns pela sua decisão, <span className="text-gradient">Founder!</span>
+            Pagamento confirmado. <span className="text-gradient">Agora crie sua conta.</span>
           </h1>
           <p className="text-sm font-medium text-muted-foreground mb-8">
-            Você acaba de profissionalizar a gestão do seu negócio e da sua vida com o Sommar App.
+            Use o mesmo e-mail do checkout. É assim que o acesso libera automaticamente.
           </p>
 
           <div className="w-full text-left p-6 rounded-2xl gradient-border mb-8">
@@ -135,11 +135,30 @@ export default function App() {
                 <Lock className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-extrabold text-white uppercase mb-1">Verifique seu E-mail</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  A <strong className="text-white">Cakto</strong> enviará um e-mail com os detalhes da sua
-                  transação e o acesso ao app. Verifique também a pasta de spam.
+                <h3 className="text-sm font-extrabold text-white uppercase mb-1">
+                  1) Cakto → 2) Cadastro → 3) Acesso
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+                  Crie sua conta em{' '}
+                  <a
+                    href="https://app.sommarapp.com.br/cadastro"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[#22C55E] underline underline-offset-2"
+                  >
+                    app.sommarapp.com.br/cadastro
+                  </a>{' '}
+                  com o <strong className="text-white">mesmo e-mail</strong> do checkout. A Cakto também
+                  envia o comprovante — confira o spam se não aparecer.
                 </p>
+                <a
+                  href="https://app.sommarapp.com.br/cadastro"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center w-full bg-gradient-to-r from-[#22C55E] to-[#4ADE80] text-black font-extrabold text-xs uppercase tracking-widest py-3.5 rounded-xl"
+                >
+                  Criar minha conta
+                </a>
               </div>
             </div>
           </div>
