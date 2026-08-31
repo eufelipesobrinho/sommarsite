@@ -857,11 +857,8 @@ export default function SalesPage() {
                       </span>
                       <span className="text-[10px] font-bold text-neutral-500"> à vista /ano</span>
                     </div>
-                    <p className="mt-2 text-sm font-extrabold text-white/80 tracking-tight">
-                      ≠ R$ 30,00*
-                    </p>
-                    <p className="text-[10px] text-muted-foreground font-medium mt-1">
-                      * + taxas Cakto
+                    <p className="mt-2 text-[11px] sm:text-xs text-[#22C55E] font-bold tracking-wide">
+                      ou 12x de R$ 30,68 (taxas Cakto inclusas)
                     </p>
                   </div>
 
